@@ -14,7 +14,7 @@ const pathname = usePathname();
   <aside className='sidebar'>
   <div className='flex size-full flex-col gap-4'>
   <Link href='/' className='sidebar-logo'>
-	<Image src='/assets/imagisha-h-crop.png' alt='logo' width={80} height={80} />
+	<Image src='/assets/imagisha-h-crop.png' alt='logo' width={250} height={200} />
   </Link>
 
   <nav className='sidebar-nav'>
