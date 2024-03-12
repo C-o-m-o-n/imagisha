@@ -1,7 +1,7 @@
 import { SignUp } from '@clerk/nextjs'
 import React, { Children } from 'react'
 
-function SignUpPage() {
+const SignUpPage = () => {
   return <SignUp />
 }
 

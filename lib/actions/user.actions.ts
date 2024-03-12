@@ -1,44 +1,23 @@
-"use server"
 
+"use server";
 import { revalidatePath } from "next/cache";
 
 import User from "../database/models/user.model";
 import { connectToDatabase } from "../database/mongoose";
 import { handleError } from "../utils";
-// import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { collection, getDoc, getDocs, doc, setDoc } from 'firebase/firestore';
-
-import { db } from '../../firebaseConfig'
-
-
 
 // CREATE
-// export async function createUser(user: CreateUserParams) {
-//   try {
-//     await connectToDatabase();
+export async function createUser(user: CreateUserParams) {
+  try {
+    await connectToDatabase();
 
-//     const newUser = await User.create(user);
+    const newUser = await User.create(user);
 
-//     return JSON.parse(JSON.stringify(newUser));
-//   } catch (error) {
-//     handleError(error);
-//   }
-// }
-
-
-export const saveUser = async (user: CreateUserParams) => {
-  try{
-    const convCollectionRef = collection(db, 'test_imagisha_user');
-  await setDoc(doc(convCollectionRef, "user1"), {
-    user
-  })
-
-  } catch(error){
-    console.log(error)
+    return JSON.parse(JSON.stringify(newUser));
+  } catch (error) {
+    handleError(error);
   }
 }
-
-
 
 // READ
 export async function getUserById(userId: string) {

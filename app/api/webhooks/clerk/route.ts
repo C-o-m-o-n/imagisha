@@ -5,8 +5,7 @@ import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 import { Webhook } from "svix";
 
-
-import {  saveUser, deleteUser, updateUser } from "@/lib/actions/user.actions";
+import { createUser, deleteUser, updateUser } from "@/lib/actions/user.actions";
 
 export async function POST(req: Request) {
   // You can find this in the Clerk Dashboard -> Webhooks -> choose the webhook
@@ -39,7 +38,6 @@ export async function POST(req: Request) {
   const wh = new Webhook(WEBHOOK_SECRET);
 
   let evt: WebhookEvent;
-
   // Verify the payload with the headers
   try {
     evt = wh.verify(body, {
@@ -71,15 +69,7 @@ export async function POST(req: Request) {
       photo: image_url,
     };
 
-    const newUser = await saveUser(user);
-
-
-
-
-
-
-
-
+    const newUser = await createUser(user);
     // Set public metadata
     if (newUser) {
       await clerkClient.users.updateUserMetadata(id, {
@@ -121,4 +111,5 @@ export async function POST(req: Request) {
   console.log("Webhook body:", body);
 
   return new Response("", { status: 200 });
+
 }
