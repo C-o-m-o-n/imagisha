@@ -1,22 +1,20 @@
-import  Sidebar from '../../components/shared/Sidebar'
-import MobileNav  from '../../components/shared/MobileNav'
-import React, { Children } from 'react'
+import MobileNav from '@/components/shared/MobileNav'
+import Sidebar from '@/components/shared/Sidebar'
+import { Toaster } from '@/components/ui/toaster'
 
-function Layout({children}: {children: React.ReactNode}) {
+const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <main className='root' >
-	{/** sidebar **/}
-	<Sidebar />
-	{/** mobile navigation **/}
+    <main className="root">
+      <Sidebar />
+      <MobileNav />
 
-	<MobileNav />
-<div className='root-container'>
-        <div className='wrapper'>
-
-      { children }
-
+      <div className="root-container">
+        <div className="wrapper">
+          {children}
         </div>
       </div>
+      
+      <Toaster />
     </main>
   )
 }
