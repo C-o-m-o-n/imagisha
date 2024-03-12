@@ -102,8 +102,8 @@ export async function getAllImages({ limit = 9, page = 1, searchQuery = '' }: {
     await connectToDatabase();
 
     cloudinary.config({
-      cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
-      api_key: process.env.CLOUDINARY_API_KEY,
+      cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_NAME,
+      api_key: process.env.CLOUDINAY_API_KEY,
       api_secret: process.env.CLOUDINARY_API_SECRET,
       secure: true,
     })
