@@ -6,6 +6,8 @@ import { CldImage, CldUploadWidget } from "next-cloudinary"
 import { PlaceholderValue } from "next/dist/shared/lib/get-img-props";
 import Image from "next/image";
 
+import { Plus } from 'lucide-react';
+
 type MediaUploaderProps = {
   onValueChange: (value: string) => void;
   setImage: React.Dispatch<any>;
@@ -84,12 +86,7 @@ const MediaUploader = ({
           ): (
             <div className="media-uploader_cta" onClick={() => open()}>
               <div className="media-uploader_cta-image">
-                <Image 
-                  src="/assets/icons/add.svg"
-                  alt="Add Image"
-                  width={24}
-                  height={24}
-                />
+              <Plus size={24} className="bg-gradient-to-r from-cyan-700 to-[#007822] text-white rounded" />
               </div>
                 <p className="p-14-medium">Click here to upload image</p>
             </div>
