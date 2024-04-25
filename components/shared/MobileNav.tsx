@@ -72,7 +72,7 @@ const MobileNav = () => {
         </SignedIn>
 
         <SignedOut>
-            <Button asChild className="button bg-purple-gradient bg-cover">
+            <Button asChild className="button bg-gradient-to-r from-cyan-700 to-[#007822] bg-cover">
               <Link href="/sign-in">Login</Link>
             </Button>
           </SignedOut>
