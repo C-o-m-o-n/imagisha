@@ -1,12 +1,16 @@
 "use client";
 
 import { loadStripe } from "@stripe/stripe-js";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import { useToast } from "@/components/ui/use-toast";
 import { checkoutCredits } from "@/lib/actions/transaction.action";
 
 import { Button } from "../ui/button";
+import useSWR from 'swr'
+import axios from "axios";
+ 
+// const fetcher = (...args: Parameters<typeof fetch>) => fetch(...args).then((res) => res.json())
 
 const Checkout = ({
   plan,
@@ -19,7 +23,7 @@ const Checkout = ({
   credits: number;
   buyerId: string;
 }) => {
-  const { toast } = useToast();
+  const { toast } = useToast();  
 
   useEffect(() => {
     loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
@@ -48,14 +52,29 @@ const Checkout = ({
   }, []);
 
   const onCheckout = async () => {
-    const transaction = {
-      plan,
-      amount,
-      credits,
-      buyerId,
-    };
+    // const transaction = {
+    //   plan,
+    //   amount,
+    //   credits,
+    //   buyerId,
+    // };
+    // await checkoutCredits();
 
-    await checkoutCredits(transaction);
+    try {
+      const response = await axios.post('/api/mpesa', {
+        amount: 1,
+        phone: 254703991583,
+        businessName:"Comon tech",
+        transactionDesc: "Payment of X" ,
+      });
+  
+      // Handle successful response (e.g., show success message, redirect to confirmation page)
+      console.log('Lipa na Mpesa request successful:', response.data);
+    } catch (error) {
+      console.error('Error sending Lipa na Mpesa request:', error);
+      // Handle errors (e.g., display error message)
+    }
+    
   };
 
   return (
@@ -64,8 +83,7 @@ const Checkout = ({
         <Button
           type="submit"
           role="link"
-          className="w-full rounded-full bg-gradient-to-r from-cyan-700 to-[#007822] text-white bg-cover"
-        >
+          className="w-full rounded-full bg-gradient-to-r from-cyan-700 to-[#007822] text-white bg-cover">
           Buy Credit
         </Button>
       </section>
