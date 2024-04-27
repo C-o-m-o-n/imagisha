@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import { createTransaction } from "@/lib/actions/transaction.action";
+// import { createTransaction } from "@/lib/actions/transaction.action";
 import { NextResponse } from "next/server";
 import stripe from "stripe";
 
@@ -33,9 +33,9 @@ export async function POST(request: Request) {
       createdAt: new Date(),
     };
 
-    const newTransaction = await createTransaction(transaction);
+    // const newTransaction = await createTransaction(transaction);
     
-    return NextResponse.json({ message: "OK", transaction: newTransaction });
+    // return NextResponse.json({ message: "OK", transaction: newTransaction });
   }
 
   return new Response("", { status: 200 });
