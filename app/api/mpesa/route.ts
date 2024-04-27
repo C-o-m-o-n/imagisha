@@ -26,7 +26,7 @@ console.log("RES :: ", res)
   };
   
   const processrequestUrl = 'https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest';
-const passkey = "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919";
+const passkey = "get from dashboard";
 const Timestamp = new Date().toISOString().replace(/-/g, '').replace(/:/g, '').replace(/\..*Z/, '000Z');
   const BusinessShortCode = '174379';
   const Password = Buffer.from(BusinessShortCode + passkey + Timestamp).toString('base64');
