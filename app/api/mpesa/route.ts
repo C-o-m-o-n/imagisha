@@ -24,20 +24,26 @@ console.log("RES :: ", res)
   const headers = {
     Authorization: `Bearer ${token}`
   };
+  
+  const processrequestUrl = 'https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest';
+const passkey = "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919";
+const Timestamp = new Date().toISOString().replace(/-/g, '').replace(/:/g, '').replace(/\..*Z/, '000Z');
+  const BusinessShortCode = '174379';
+  const Password = Buffer.from(BusinessShortCode + passkey + Timestamp).toString('base64');
 
   // Set up your payment request parameters here
   const paymentData = {
-    "BusinessShortCode": 174379,
-    "Password": "MTc0Mzc5YmZiMjc5ZjlhYTliZGJjZjE1OGU5N2RkNzFhNDY3Y2QyZTBjODkzMDU5YjEwZjc4ZTZiNzJhZGExZWQyYzkxOTIwMjQwNDI3MDE1MTEx",
-    "Timestamp": "20240427015111",
+    "BusinessShortCode": BusinessShortCode,
+    "Password": Password,
+    "Timestamp": Timestamp,
     "TransactionType": "CustomerPayBillOnline",
-    "Amount": res.amount,
+    "Amount": 1,
     "PartyA": 254708374149,
     "PartyB": 174379,
     "PhoneNumber": res.phone,
     "CallBackURL": "https://mydomain.com/path",
-    "AccountReference": res.businessName,
-    "TransactionDesc": res.transactionDesc
+    "AccountReference": "Comon Tech",
+    "TransactionDesc": "Trying out stkpush"
   };
 
   try {
