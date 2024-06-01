@@ -27,6 +27,9 @@ export default function RootLayout({
       variables: { colorPrimary: '#624cf5' }
     }}>
       <html lang="en">
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4966357052802127"
+     crossOrigin="anonymous"></script>
+     <meta name="google-adsense-account" content="ca-pub-4966357052802127"></meta>
         <body className={cn("font-IBMPlex antialiased", IBMPlex.variable)}>
           {children}
         </body>
