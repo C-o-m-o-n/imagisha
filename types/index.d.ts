@@ -79,13 +79,20 @@ declare type CheckoutTransactionParams = {
   buyerId: string;
 };
 
+// declare type CreateTransactionParams = {
+//   stripeId: string;
+//   amount: number;
+//   credits: number;
+//   plan: string;
+//   buyerId: string;
+//   createdAt: Date;
+// };
 declare type CreateTransactionParams = {
-  stripeId: string;
   amount: number;
   credits: number;
   plan: string;
   buyerId: string;
-  createdAt: Date;
+  // createdAt: Date;
 };
 
 declare type TransformationTypeKey =

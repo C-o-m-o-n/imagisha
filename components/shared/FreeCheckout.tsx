@@ -16,7 +16,7 @@ import {
   } from "@/components/ui/dialog"
 import { Button } from "../ui/button";
 
-const Checkout = ({
+const FreeCheckout = ({
   plan,
   amount,
   credits,
@@ -62,8 +62,9 @@ const Checkout = ({
       credits,
       buyerId,
     };
-
+  
     await createTransaction(transaction);
+
   };
 
 
@@ -71,15 +72,20 @@ const Checkout = ({
     return (
       <Dialog>
         <DialogTrigger asChild>
-   
+<form action={onCheckout} method="POST">
+      <section>
       <Button variant="outline" 
+          type="submit"
           role="link"
           className="w-full rounded-full bg-gradient-to-r from-cyan-700 to-[#007822] 
-          text-white bg-cover">Lipa na M-pesa</Button>
+          text-white bg-cover">Free Consumable</Button>
+      </section>
+    </form>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
-            <DialogDescription>Still implementing this feature. In the mean time, you can enjoy the service for free</DialogDescription>
+          <DialogTitle>Bought {credits} credits worth KSH {amount}</DialogTitle>
+            <DialogDescription>Success!!</DialogDescription>
           </DialogHeader>
           
         </DialogContent>
@@ -93,4 +99,4 @@ const Checkout = ({
 };
 
 
-export default Checkout;
+export default FreeCheckout;
