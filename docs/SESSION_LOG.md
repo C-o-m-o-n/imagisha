@@ -21,3 +21,6 @@
 - Untracked `pnpm-lock.yaml` should not be committed (Cloudflare would switch to pnpm).
 
 **Next steps**: update the Cloudflare build/deploy commands, set build vars and runtime secrets, allow 0.0.0.0/0 in Atlas, push the branch, then smoke-test the deployed URL (sign-in, /profile, a transformation, the Clerk webhook).
+
+## 2026-11-16 (later) — Cloudflare build failed on pnpm
+The stale `pnpm-lock.yaml` (generated from the old Next 14 package.json) was committed in 4cf24de. When it's present, Cloudflare picks pnpm and runs `pnpm install --frozen-lockfile`, which failed. Untracked it and added it to `.gitignore`; npm and `package-lock.json` are the only package manager and lockfile now.
