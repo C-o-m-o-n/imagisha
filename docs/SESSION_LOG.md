@@ -24,3 +24,8 @@
 
 ## 2026-11-16 (later) — Cloudflare build failed on pnpm
 The stale `pnpm-lock.yaml` (generated from the old Next 14 package.json) was committed in 4cf24de. When it's present, Cloudflare picks pnpm and runs `pnpm install --frozen-lockfile`, which failed. Untracked it and added it to `.gitignore`; npm and `package-lock.json` are the only package manager and lockfile now.
+
+## 2026-11-16 (later) — Deploy failed: "Could not find compiled Open Next config"
+Cloudflare's build command was still `npm run build` (plain `next build`), so `.open-next/` never existed. Fix: `build` script is now `opennextjs-cloudflare build`;
+plain Next build moved to `build:next`, and `open-next.config.ts` sets `buildCommand = "npm run build:next"` so it doesn't recurse. The default dashboard commands
+(`npm run build` + `npx wrangler deploy`) now work. Verified locally: `npm run build` → `.open-next/worker.js`; `wrangler deploy --dry-run` OK (2.5 MiB gzip).

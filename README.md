@@ -38,8 +38,8 @@ The app runs on Cloudflare Workers via [`@opennextjs/cloudflare`](https://openne
 Config lives in `wrangler.jsonc` and `open-next.config.ts`.
 
 ### Workers Builds (Git-connected) settings
-- **Build command:** `npx opennextjs-cloudflare build`
-- **Deploy command:** `npx opennextjs-cloudflare deploy`
+- **Build command:** `npm run build` (runs `opennextjs-cloudflare build`, which calls `npm run build:next` internally)
+- **Deploy command:** `npx wrangler deploy`
 
 ### Environment variables
 - **Build variables** (inlined into the client bundle at build time, so they must exist during the build):
