@@ -1,0 +1,25 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"main": ".open-next/worker.js",
+	"name": "imagisha",
+	"compatibility_date": "2026-11-01",
+	"compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+	"assets": {
+		"directory": ".open-next/assets",
+		"binding": "ASSETS"
+	},
+	"services": [
+		{
+			// Self-reference service binding; must match the worker name.
+			"binding": "WORKER_SELF_REFERENCE",
+			"service": "imagisha"
+		}
+	],
+	"images": {
+		// Next.js <Image> optimization via Cloudflare Images
+		"binding": "IMAGES"
+	},
+	"observability": {
+		"enabled": true
+	}
+}
