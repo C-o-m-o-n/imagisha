@@ -47,3 +47,4 @@ components/shared/mpesaCheckout.tsx
 # this project uses npm (package-lock.json)
 pnpm-lock.yaml
 yarn.lock
+!.env.production

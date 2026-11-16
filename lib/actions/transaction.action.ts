@@ -48,12 +48,13 @@ export async function createTransaction(transaction: CreateTransactionParams) {
     })
     console.log("newTransaction", newTransaction)
     await updateCredits(transaction.buyerId, transaction.credits);
-    redirect(`${process.env.NEXT_PUBLIC_SERVER_URL}/profile`)
-
-    return JSON.parse(JSON.stringify(newTransaction));
   } catch (error) {
     handleError(error)
+    return;
   }
+
+  // redirect() throws NEXT_REDIRECT, so it must stay outside the try/catch or it gets swallowed
+  redirect("/profile")
 }
 
 
