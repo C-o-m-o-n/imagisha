@@ -1,0 +1,10 @@
+# Copy to .dev.vars for `npm run preview` (wrangler local runtime).
+# In production, set these as Secrets in Cloudflare: Workers & Pages > imagisha > Settings > Variables and Secrets.
+CLERK_SECRET_KEY=
+MONGODB_URL=
+CLOUDINARY_API_KEY=
+CLOUDINARY_API_SECRET=
+WEBHOOK_SECRET=
+STRIPE_WEBHOOK_SECRET=
+MPESA_CONSUMER_KEY=
+MPESA_CONSUMER_SECRET=

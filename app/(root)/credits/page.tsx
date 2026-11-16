@@ -1,5 +1,6 @@
 
-import { SignedIn, auth } from "@clerk/nextjs";
+import { Show } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 import Header from "@/components/shared/Header";
@@ -10,7 +11,7 @@ import Checkout from "@/components/shared/Checkout";
 import FreeCheckout from "@/components/shared/FreeCheckout";
 
 const Credits = async () => {
-  const { userId } = auth();
+  const { userId } = await auth();
 
   if (!userId) redirect("/sign-in");
 
@@ -64,14 +65,14 @@ const Credits = async () => {
                 buyerId={user._id}
               />
               ) : (
-                <SignedIn>
+                <Show when="signed-in">
                   <Checkout
                     plan={plan.name}
                     amount={plan.price}
                     credits={plan.credits}
                     buyerId={user._id}
                   />
-                </SignedIn>
+                </Show>
               )}
             </li>
           ))}
