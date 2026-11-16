@@ -43,3 +43,7 @@ components/shared/mpesaCheckout.tsx
 .wrangler
 .dev.vars*
 !.dev.vars.example
+
+# this project uses npm (package-lock.json)
+pnpm-lock.yaml
+yarn.lock
