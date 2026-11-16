@@ -42,11 +42,8 @@ Config lives in `wrangler.jsonc` and `open-next.config.ts`.
 - **Deploy command:** `npx wrangler deploy`
 
 ### Environment variables
-- **Build variables** (inlined into the client bundle at build time, so they must exist during the build):
-  `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`, `NEXT_PUBLIC_CLERK_SIGN_IN_URL`, `NEXT_PUBLIC_CLERK_SIGN_UP_URL`,
-  `NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL`, `NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL`,
-  `NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME`, `NEXT_PUBLIC_SERVER_URL`, `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`
-- **Runtime secrets** (Worker > Settings > Variables and Secrets): see `.dev.vars.example`.
+- **Public build-time values** (`NEXT_PUBLIC_*`) are committed in `.env.production`. Next.js inlines them during the build, so setting them as Worker runtime variables does nothing.
+- **Runtime secrets** (Worker > Settings > Variables and Secrets, type *Secret*): see `.dev.vars.example`.
 
 ### MongoDB Atlas
 Workers have no fixed egress IP, so the Atlas network access list must allow `0.0.0.0/0`.

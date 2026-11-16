@@ -29,3 +29,19 @@ The stale `pnpm-lock.yaml` (generated from the old Next 14 package.json) was com
 Cloudflare's build command was still `npm run build` (plain `next build`), so `.open-next/` never existed. Fix: `build` script is now `opennextjs-cloudflare build`;
 plain Next build moved to `build:next`, and `open-next.config.ts` sets `buildCommand = "npm run build:next"` so it doesn't recurse. The default dashboard commands
 (`npm run build` + `npx wrangler deploy`) now work. Verified locally: `npm run build` → `.open-next/worker.js`; `wrangler deploy --dry-run` OK (2.5 MiB gzip).
+
+## 2026-11-16 (later) — Build OK, deploy failed on `npx wrangler preview`
+- Build now passes in Cloudflare. The deploy for the non-production branch `cloudflare-workers` ran `npx wrangler preview` (beta), which requires a `previews` block in wrangler config.
+  Fix in the dashboard: set the non-production deploy command to `npx wrangler versions upload`, or deploy from the production branch with `npx wrangler deploy`.
+  Do NOT add a `previews.vars` block with real values to wrangler.jsonc; it would commit secrets.
+- SECURITY: that error printed every env value (Clerk secret, Cloudinary secret, Mongo URL with password, Clerk webhook secret, Vercel OIDC token) in plain text in the build log.
+  They didn't come from git (history checked clean), so they must be set as Cloudflare build variables. Recommended: rotate them, move server secrets to Worker runtime Secrets,
+  keep only NEXT_PUBLIC_* as build vars, and drop VERCEL_OIDC_TOKEN.
+
+## 2026-11-16 (later) — Env vars sorted
+- The user rotated the secrets and set them as encrypted Worker runtime secrets.
+- NEXT_PUBLIC_* are inlined at build time, so as runtime vars they did nothing. They're now committed in `.env.production` (public values only; `.gitignore` has `!.env.production`).
+  The plain-text NEXT_PUBLIC_* runtime vars in the dashboard can be deleted (wrangler deploy would drop them anyway, since wrangler.jsonc has no `vars`).
+- Fixed: `createTransaction` called `redirect()` inside try/catch, so handleError swallowed NEXT_REDIRECT and it never redirected. It also used `${NEXT_PUBLIC_SERVER_URL}/profile` = `//profile`.
+  Now `redirect("/profile")` runs after the try/catch. `NEXT_PUBLIC_SERVER_URL` is no longer used.
+- Still open: `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` is unset, so Checkout.tsx calls loadStripe(undefined). This predates the upgrade; Stripe checkout is commented out anyway.
